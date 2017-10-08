@@ -1,0 +1,4 @@
+{
+  "connectionString" : "mongodb://localhost/roomhunter",
+  "port" : 6969
+}
