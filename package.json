@@ -1,0 +1,27 @@
+{
+  "name": "roomhunter",
+  "version": "1.0.0",
+  "description": "project hackathon",
+  "main": "server.js",
+  "scripts": {
+    "test": "abc",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thucnqptit/roomhunter.git"
+  },
+  "author": "Thuc, Cuc, Vu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thucnqptit/roomhunter/issues"
+  },
+  "homepage": "https://github.com/thucnqptit/roomhunter#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.12.1"
+  }
+}
