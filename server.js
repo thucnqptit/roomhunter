@@ -4,8 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config.json');
-const imageApi = require('./modules/api/users/usersController');
-// const staffApi = require('./modules/api/staffs/staffsController');
+const userApi = require('./modules/api/users/usersController');
 const roomApi = require('./modules/api/rooms/roomsController');
 
 var app = express();
@@ -13,9 +12,8 @@ var app = express();
 app.use(bodyParser.json({ extended : true}));
 app.use(bodyParser.urlencoded({ extended : true}));
 
-app.use('/api/users', imageApi);
-app.use('/api/staffs', imageApi);
-app.use('/api/room', imageApi);
+app.use('/api/users', userApi);
+app.use('/api/rooms', roomApi);
 
 mongoose.connect(config.connectionString, (err) => {
   if (err) {
@@ -24,7 +22,7 @@ mongoose.connect(config.connectionString, (err) => {
     console.log('Connect to db success');
   }
 });
-
-app.listen(config.port , () => {
-  console.log(`App listen on ${config.port}`);
+let port = process.env.port || config.port;
+app.listen(port , () => {
+  console.log(`App listen on ${port}`);
 });

@@ -9,7 +9,8 @@ Router.post('/', (req, res) => {
     email : req.body.email,
     avatar : req.body.avatar,
     address : req.body.address,
-    dob : req.body.dob
+    dob : req.body.dob,
+    role: req.body.role
   };
 
   usersModel.createUser(newUser, (err, doc) => {
