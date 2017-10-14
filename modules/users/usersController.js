@@ -22,7 +22,4 @@ Router.post('/', (req, res) => {
   });
 });
 
-Router.post('/login', usersModel.login);
-Router.get('/logout',,usersModel.login)
-
 module.exports = Router;
