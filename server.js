@@ -6,6 +6,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config.json');
 const api = require('./routers/api');
+const index = require('./routers/index');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended : true}));
 //     req.headers['Authorization'] = 'access_token ' + ls.get('at');
 //     next();
 // });
+app.use('/', index);
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
