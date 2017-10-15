@@ -1,5 +1,4 @@
 {
-  "connectionString" : "mongodb://thucnq:thucnq@ds021984.mlab.com:21984/roomhunter",
+  "connectionString" : "mongodb://localhost/roomhunter",
   "port" : 6969
 }
-//connectionString : mongodb://localhost/roomhunter
