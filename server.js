@@ -19,10 +19,10 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json({ extended : true}));
 app.use(bodyParser.urlencoded({ extended : true}));
-// app.use('/*', function(req, res, next){
-//     req.headers['Authorization'] = 'access_token ' + ls.get('at');
-//     next();
-// });
+app.use('/*', function(req, res, next){
+    req.headers['Authorization'] = 'access_token ' + ls.get('at');
+    next();
+});
 app.use('/', index);
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
