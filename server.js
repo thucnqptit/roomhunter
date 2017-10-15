@@ -34,6 +34,9 @@ mongoose.connect(config.connectionString, (err) => {
   }
 });
 
-app.listen(config.port , () => {
-  console.log(`App listen on ${config.port}`);
+const port = process.env.PORT || 6969;
+app.listen(port, () => {
+  console.log(`App listen on ${port}`);
 });
+
+// mongodb://localhost/roomhunter
