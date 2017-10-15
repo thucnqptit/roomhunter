@@ -18,10 +18,10 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json({ extended : true}));
 app.use(bodyParser.urlencoded({ extended : true}));
-app.use('/*', function(req, res, next){
-    req.headers['Authorization'] = 'access_token ' + ls.get('at');
-    next();
-});
+// app.use('/*', function(req, res, next){
+//     req.headers['Authorization'] = 'access_token ' + ls.get('at');
+//     next();
+// });
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -34,7 +34,7 @@ mongoose.connect(config.connectionString, (err) => {
   }
 });
 
-const port = process.env.PORT || 6969;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`App listen on ${port}`);
 });
