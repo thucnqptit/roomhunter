@@ -1,12 +1,13 @@
 'use strict'
 const ls = require('local-storage');
+const handlebars = require('express-handlebars');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 const config = require('./config.json');
 const api = require('./routers/api');
-const index = require('./routers/index');
+const index = require('./routers/index.js');
 
 var app = express();
 
@@ -19,11 +20,13 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json({ extended : true}));
 app.use(bodyParser.urlencoded({ extended : true}));
+app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 app.use('/*', function(req, res, next){
     req.headers['Authorization'] = 'access_token ' + ls.get('at');
     next();
 });
-// app.use('/', index);
+app.use('/', index);
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -36,7 +39,7 @@ mongoose.connect(config.connectionString, (err) => {
   }
 });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 1010;
 app.listen(port, () => {
   console.log(`App listen on ${port}`);
 });
