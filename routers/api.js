@@ -87,6 +87,8 @@ router.get('/room-detail/:id',(req, res) => {
     }
   })
 });
+
+router.get('/room/:id', rooms.getRoom);
 router.post('/rooms', isVerifiedToken, isAdmin, rooms.addRoom);
 router.put('/rooms', isVerifiedToken, isAdmin, rooms.editRoom);
 

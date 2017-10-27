@@ -119,6 +119,7 @@ var getRoom = function (req, res) {
 module.exports = {
   addRoom,
   editRoom,
+  getRoom,
   getRoomsOnPage,
   getNumberOfRooms,
   getRoomById
