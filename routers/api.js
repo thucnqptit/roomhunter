@@ -3,7 +3,12 @@ var multer = require('multer');
 var mongoose = require('mongoose');
 var usersSchema = require('../modules/users/usersSchema');
 var usersModel = mongoose.model('users', usersSchema);
+// var roomsModel = mongoose.model('rooms', roomsSchema);
+var roomsModel = require('../modules/rooms/roomsModel.js');
+
+
 var rooms = require('../modules/rooms/roomsModel');
+var roomsSchema = require('../modules/rooms/roomsSchema');
 var users = require('../modules/users/usersModel');
 
 var router = express.Router();
@@ -72,6 +77,16 @@ router.put('/users', isVerifiedToken, isAdmin, users.editUser);
 
 router.get('/rooms', rooms.getRoomsOnPage);
 router.get('/rooms-number', rooms.getNumberOfRooms);
+router.get('/room-detail/:id',(req, res) => {
+  let id = req.params.id;
+  roomsModel.getRoomById(id, (err, room) => {
+    if(err) {
+      res.send(err);
+    }else{
+      res.send(room);
+    }
+  })
+});
 router.post('/rooms', isVerifiedToken, isAdmin, rooms.addRoom);
 router.put('/rooms', isVerifiedToken, isAdmin, rooms.editRoom);
 

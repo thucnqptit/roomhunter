@@ -90,9 +90,36 @@ var addRoom = function(req, res) {
 var editRoom = function () {
 
 }
+
+const getRoomById = (id, callback) => {
+  roomsModel.findOne({'_id' : id}, (err, doc)=> {
+    if(err) {
+      res.send(err);
+    } else{
+      callback(null, doc);
+    }
+  });
+};
+
+var getRoom = function (req, res) {
+        roomsModel.findOne({id: req.query.id})
+            .populate('users')
+            .exec(function (err, room) {
+                if (err) {
+                    res.json({ code: 1, error: err });
+                } else {
+                    res.json({
+                        code: 1,
+                        result: room
+                    });
+                }
+            });
+}
+
 module.exports = {
   addRoom,
   editRoom,
   getRoomsOnPage,
-  getNumberOfRooms
+  getNumberOfRooms,
+  getRoomById
 }

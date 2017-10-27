@@ -97,6 +97,7 @@ const getUserById = function (req, res) {
 const getUsersOnPage = function (req, res) {
 
 }
+
 module.exports = {
   addUser,
   editUser,
