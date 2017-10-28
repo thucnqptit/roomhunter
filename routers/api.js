@@ -77,18 +77,17 @@ router.put('/users', isVerifiedToken, isAdmin, users.editUser);
 
 router.get('/rooms', rooms.getRoomsOnPage);
 router.get('/rooms-number', rooms.getNumberOfRooms);
-router.get('/room-detail/:id',(req, res) => {
+router.get('/room/:id',(req, res) => {
   let id = req.params.id;
   roomsModel.getRoomById(id, (err, room) => {
     if(err) {
       res.send(err);
     }else{
-      res.send(room);
+      res.json(room);
     }
   })
 });
 
-router.get('/room/:id', rooms.getRoom);
 router.post('/rooms', isVerifiedToken, isAdmin, rooms.addRoom);
 router.put('/rooms', isVerifiedToken, isAdmin, rooms.editRoom);
 

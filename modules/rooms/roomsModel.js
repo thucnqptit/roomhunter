@@ -101,25 +101,9 @@ const getRoomById = (id, callback) => {
   });
 };
 
-var getRoom = function (req, res) {
-        roomsModel.findOne({id: req.query.id})
-            .populate('users')
-            .exec(function (err, room) {
-                if (err) {
-                    res.json({ code: 1, error: err });
-                } else {
-                    res.json({
-                        code: 1,
-                        result: room
-                    });
-                }
-            });
-}
-
 module.exports = {
   addRoom,
   editRoom,
-  getRoom,
   getRoomsOnPage,
   getNumberOfRooms,
   getRoomById
