@@ -9,6 +9,8 @@ const config = require('./config.json');
 const api = require('./routers/api');
 const index = require('./routers/index.js');
 
+mongoose.Promise = require('bluebird');
+
 var app = express();
 
 app.use(function(req, res, next) {

@@ -12,14 +12,17 @@ var typeOfSearch = function(key){
     }
     return "regex";
 }
+
+var options = {};
 function setOption(key){
   if (key === undefined) return;
   if (key !== 'undefined'){
       if(typeOfSearch(key) === 'regex'){
-          options = { $or:[{'address': { "$regex": key, "$options": "i" }},{'street': { "$regex": key, "$options": "i" }},{'district': { "$regex": key, "$options": "i" }}] };
+          options = { $or:[{'touristPlaces': { "$regex": key, "$options": "i" }}] };
       }
       else{
           options = {$text: {$search: key}};
+
       }
   }
 }
@@ -27,10 +30,10 @@ var getRoomsOnPage = function (req, res) {
         var page = req.query.page || 1;
         var key = req.query.key;
         var sort = req.query.sort || 1;
-        var options = {};
+        // var options = {};
         setOption(key);
         roomsModel.find(options)
-            .populate('users')
+            .populate('rooms')
             .sort({price: sort, created_at: -1})
             .skip((page - 1) * 20)
             .limit(20)
@@ -69,16 +72,15 @@ var addRoom = function(req, res) {
             address : req.body.address,
             street : req.body.street,
             district : req.body.district,
+            city: req.body.city,
             price : req.body.price,
             phoneNumber : req.body.phoneNumber,
-            status : req.body.status,
             area: req.body.area,
             description: req.body.description,
             images: req.body.images,
             owner: req.body.owner,
-            numOfBedrooms: req.body.numOfBedrooms,
-            numOfBathrooms: req.body.numOfBathrooms,
-            bathroomInRoom: req.body.bathroomInRoom
+            typeOfRoom: req.body.typeOfRoom,
+            touristPlaces: req.body.touristPlaces
           });
           room.save(function (err) {
               if (err) res.json({code: 0, error: err});

@@ -7,7 +7,7 @@ const roomsSchema = new Schema({
      type : String
   },
   type : {
-     type : Number
+     type : String,
   },
   address : {
      type : String
@@ -18,14 +18,14 @@ const roomsSchema = new Schema({
   district : {
      type : String
   },
+  city: {
+    type: String
+  },
   price : {
      type : Number
   },
   phoneNumber : {
      type : String
-  },
-  status : {
-     type : Number
   },
   area: {
     type: Number
@@ -40,14 +40,11 @@ const roomsSchema = new Schema({
     type: ObjectId,
     ref: 'rooms'
   },
-  numOfBedrooms: {
-    type: Number
+  typeOfRoom: {
+    type: [String]
   },
-  numOfBathrooms: {
-    type: Number
-  },
-  bathroomInRoom: {
-    type: Boolean
+  touristPlaces: {
+    type: [String]
   }
 }, { timestamps: { createdAt: 'created_at', updatedAt : 'updated_at' }} );
 

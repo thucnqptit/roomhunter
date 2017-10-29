@@ -71,7 +71,7 @@ router.get('/logout', isVerifiedToken, users.logout);
 
 router.get('/users',isVerifiedToken, users.getUsersOnPage);
 router.get('/users/:uId',isVerifiedToken, users.getUserById);
-router.post('/users',users.addUser);
+router.post('/users', isVerifiedToken, isAdmin,users.addUser);
 router.put('/users', isVerifiedToken, isAdmin, users.editUser);
 
 
@@ -88,6 +88,7 @@ router.get('/room/:id',(req, res) => {
   })
 });
 
+// router.get('/room/:id', rooms.getRoom);
 router.post('/rooms', isVerifiedToken, isAdmin, rooms.addRoom);
 router.put('/rooms', isVerifiedToken, isAdmin, rooms.editRoom);
 
