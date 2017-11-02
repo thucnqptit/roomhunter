@@ -48,5 +48,5 @@ const roomsSchema = new Schema({
   }
 }, { timestamps: { createdAt: 'created_at', updatedAt : 'updated_at' }} );
 
-roomsSchema.index({address: 'text', district: 'text', street: 'text'});
+roomsSchema.index({address: 'text', district: 'text', street: 'text', street: 'text'});
 module.exports = roomsSchema;
