@@ -73,6 +73,7 @@ var getRoomsOnPage = function (req, res) {
 var getRoom = function (req, res) {
         roomsModel.findOne({id: req.query.id})
             .populate('users')
+            // .select('_id	name	address	street	district	price	type	area	description	images	phoneNumber	status	owner	numOfBedrooms	numOfBathRooms	bathRoomInRoom createdAt updatedAt')
             .exec(function (err, room) {
                 if (err) {
                     res.json({ code: 1, error: err });
