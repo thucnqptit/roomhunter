@@ -146,6 +146,3 @@ module.exports = {
   getNumberOfRooms,
   getRoomById
 }
-// Anh Quang 09822851289
-// quang@sqoling.com.vn
-//quang.leduy@pharas.com.vn
