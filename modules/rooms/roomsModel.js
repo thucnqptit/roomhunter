@@ -4,51 +4,37 @@ const roomsSchema = require('./roomsSchema');
 let roomsModel = mongoose.model('rooms', roomsSchema);
 
 var typeOfSearch = function(key){
-  return "regex";
+    var s = "ueoaiy";
+    for(var i = 0; i < s.length; i++){
+        if(key.indexOf(s[i]) !== -1){
+            return "fulltext";
+        }
+    }
+    return "regex";
 }
 
 var options = {};
-function setOption(key, sprice, eprice){
-  console.log(key);
-  if (key !== 'undefined' && key !== undefined ){
+function setOption(key){
+  if (key === undefined) return;
+  if (key !== 'undefined'){
       if(typeOfSearch(key) === 'regex'){
-          options = { $or:[{'touristPlaces': { "$regex": key, "$options": "i" }},{'city': { "$regex": key, "$options": "i" }}] };
+          options = { $or:[{'touristPlaces': { "$regex": key, "$options": "i" }}] };
       }
       else{
           options = {$text: {$search: key}};
+
       }
-  }
-  options.price = {$gt: 0}
-  if(sprice !== 'undefined' && sprice !== undefined){
-    options.price.$gt = sprice;
-  }
-  if(eprice !== 'undefined' && eprice !== undefined){
-    options.price.$lt =  eprice;
   }
 }
 var getRoomsOnPage = function (req, res) {
         var page = req.query.page || 1;
         var key = req.query.key;
-        var sort = req.query.sort;
-        var sprice = req.query.sprice;
-        var eprice = req.query.eprice;
-        var sortOpt;
-        if (sort) {
-          sortOpt = {
-            price: sort,
-            created_at: -1
-          };
-        }
-        else{
-          sortOpt = {
-            created_at: -1
-          };
-        }
-        console.log(sprice);
-        setOption(key, sprice, eprice);
+        var sort = req.query.sort || 1;
+        // var options = {};
+        setOption(key);
         roomsModel.find(options)
             .populate('rooms')
-            .sort(sortOpt)
+            .sort({price: sort, created_at: -1})
             .skip((page - 1) * 10)
             .limit(10)
             // .select('_id	name	address	street	district	price	type	area	description	images	phoneNumber	status	owner	numOfBedrooms	numOfBathRooms	bathRoomInRoom createdAt updatedAt')
