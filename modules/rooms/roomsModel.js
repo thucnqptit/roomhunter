@@ -35,8 +35,8 @@ var getRoomsOnPage = function (req, res) {
         roomsModel.find(options)
             .populate('rooms')
             .sort({price: sort, created_at: -1})
-            .skip((page - 1) * 10)
-            .limit(10)
+            .skip((page - 1) * 20)
+            .limit(20)
             // .select('_id	name	address	street	district	price	type	area	description	images	phoneNumber	status	owner	numOfBedrooms	numOfBathRooms	bathRoomInRoom createdAt updatedAt')
             .exec(function (err, room) {
                 if (err) {
