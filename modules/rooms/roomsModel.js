@@ -24,7 +24,6 @@ function setOption(key){
           options = {$text: {$search: key}};
 
       }
-
   }
 }
 var getRoomsOnPage = function (req, res) {
@@ -32,22 +31,10 @@ var getRoomsOnPage = function (req, res) {
         var key = req.query.key;
         var sort = req.query.sort || 1;
         // var options = {};
-        var sortOpt;
-        if (sort) {
-          sortOpt = {
-            price: sort,
-            created_at: -1
-          };
-        }
-        else{
-          sortOpt = {
-            created_at: -1
-          };
-        }
         setOption(key);
         roomsModel.find(options)
             .populate('rooms')
-            .sort(sortOpt)
+            .sort({price: sort, created_at: -1})
             .skip((page - 1) * 10)
             .limit(10)
             // .select('_id	name	address	street	district	price	type	area	description	images	phoneNumber	status	owner	numOfBedrooms	numOfBathRooms	bathRoomInRoom createdAt updatedAt')
