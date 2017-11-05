@@ -24,6 +24,7 @@ function setOption(key){
           options = {$text: {$search: key}};
 
       }
+
   }
 }
 var getRoomsOnPage = function (req, res) {
